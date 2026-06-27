@@ -11,7 +11,7 @@ export default function WhyUs() {
   return (
     <section className="py-24 bg-white px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
+        <div className="text-center mb-14 reveal">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             Os nossos diferenciais
           </span>
@@ -20,7 +20,7 @@ export default function WhyUs() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((r, i) => (
-            <div key={i} className="text-center group">
+            <div key={i} className="reveal text-center group">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-orange-50 text-orange-500 mb-5 group-hover:bg-orange-500 group-hover:text-white transition-colors">
                 {r.icon}
               </div>

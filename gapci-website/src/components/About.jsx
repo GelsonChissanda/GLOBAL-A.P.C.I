@@ -10,8 +10,7 @@ export default function About() {
   return (
     <section id="sobre" className="py-24 bg-white px-6">
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        {/* Texto */}
-        <div>
+        <div className="reveal">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             Sobre Nós
           </span>
@@ -29,8 +28,7 @@ export default function About() {
           </p>
         </div>
 
-        {/* Stats */}
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 reveal">
           {stats.map((s, i) => (
             <div key={i} className="flex items-center gap-5 bg-gray-50 rounded-2xl p-6">
               <div className="text-orange-500">{s.icon}</div>

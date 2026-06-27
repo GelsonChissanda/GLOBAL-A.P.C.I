@@ -1,7 +1,4 @@
-import {
-  Heart, Shield, Lightbulb, Star, Unlock,
-  Scale, Users, BookOpen
-} from "lucide-react"
+import { Heart, Shield, Lightbulb, Star, Unlock, Scale, Users, BookOpen } from "lucide-react"
 
 const values = [
   { icon: <Heart size={24} />, title: "Comprometimento", desc: "Dedicação total à satisfação do cliente." },
@@ -18,9 +15,8 @@ export default function Values() {
   return (
     <section id="valores" className="py-24 bg-gray-900 px-6">
       <div className="max-w-6xl mx-auto">
-        {/* Missão & Visão */}
         <div className="grid md:grid-cols-2 gap-8 mb-20">
-          <div className="bg-orange-500 rounded-2xl p-10">
+          <div className="reveal bg-orange-500 rounded-2xl p-10">
             <h3 className="text-white font-black text-2xl mb-4">Missão</h3>
             <p className="text-orange-100 leading-relaxed">
               Facilitar o acesso à informação e preservar a memória institucional através da
@@ -28,7 +24,7 @@ export default function Values() {
               arquivos institucionais, promovendo a capacitação profissional em Biblioteconomia e Arquivística.
             </p>
           </div>
-          <div className="bg-white/10 rounded-2xl p-10 border border-white/10">
+          <div className="reveal bg-white/10 rounded-2xl p-10 border border-white/10">
             <h3 className="text-white font-black text-2xl mb-4">Visão</h3>
             <p className="text-gray-400 leading-relaxed">
               Ser uma academia de suporte referencial ao nível nacional e internacional
@@ -37,8 +33,7 @@ export default function Values() {
           </div>
         </div>
 
-        {/* Valores */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 reveal">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             Os nossos princípios
           </span>
@@ -47,7 +42,7 @@ export default function Values() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {values.map((v, i) => (
-            <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+            <div key={i} className="reveal bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
               <div className="text-orange-500 mb-3">{v.icon}</div>
               <h4 className="text-white font-bold mb-1">{v.title}</h4>
               <p className="text-gray-400 text-sm leading-relaxed">{v.desc}</p>

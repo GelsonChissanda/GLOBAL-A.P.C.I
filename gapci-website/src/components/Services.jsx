@@ -1,8 +1,5 @@
 import { useState } from "react"
-import {
-  Archive, Database, Library, Monitor, BookMarked,
-  ScanLine, GraduationCap, CalendarDays
-} from "lucide-react"
+import { Archive, Database, Library, Monitor, BookMarked, ScanLine, GraduationCap, CalendarDays } from "lucide-react"
 
 const empresas = [
   { icon: <Archive size={24} />, title: "Gestão de Arquivos Institucionais", desc: "Diagnóstico, organização e capacitação em gestão documental." },
@@ -30,15 +27,14 @@ export default function Services() {
   return (
     <section id="servicos" className="py-24 bg-gray-50 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 reveal">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             O que fazemos
           </span>
           <h2 className="text-4xl font-black text-gray-900 mt-2">Serviços Prestados</h2>
         </div>
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex justify-center gap-4 mb-12 reveal">
           {["empresas", "particulares"].map(t => (
             <button
               key={t}
@@ -54,10 +50,9 @@ export default function Services() {
           ))}
         </div>
 
-        {/* Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {list.map((s, i) => (
-            <div key={i} className="bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow border border-gray-100">
+            <div key={i} className="reveal bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow border border-gray-100">
               <div className="text-orange-500 mb-4">{s.icon}</div>
               <h3 className="font-bold text-gray-900 mb-2">{s.title}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>

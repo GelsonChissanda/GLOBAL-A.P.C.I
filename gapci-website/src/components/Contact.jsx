@@ -9,7 +9,7 @@ export default function Contact() {
   return (
     <section id="contacto" className="py-24 bg-gray-50 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14">
+        <div className="text-center mb-14 reveal">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             Fale Connosco
           </span>
@@ -17,8 +17,7 @@ export default function Contact() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Info */}
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 reveal">
             <div className="flex items-start gap-4">
               <div className="bg-orange-500 text-white p-3 rounded-xl">
                 <MapPin size={20} />
@@ -57,8 +56,7 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Formulário */}
-          <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div className="reveal bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
             <div className="flex flex-col gap-4">
               <input
                 name="nome"
