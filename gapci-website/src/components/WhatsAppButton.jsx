@@ -1,5 +1,5 @@
 export default function WhatsAppButton() {
-  const phone = "244952708321"
+  const phone = "244944820712"
   const message = "Olá, gostaria de saber mais sobre os serviços da GAPCI."
   const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
 
