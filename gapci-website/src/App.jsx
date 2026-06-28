@@ -14,7 +14,7 @@ function App() {
   useReveal()
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Hero />
       <About />
       <Services />
