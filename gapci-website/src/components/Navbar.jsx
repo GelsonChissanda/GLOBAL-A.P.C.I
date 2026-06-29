@@ -11,7 +11,6 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [aberto, setAberto] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -101,13 +100,24 @@ export default function Navbar() {
       {/* Menu mobile */}
       {open && (
         <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col gap-3">
-          <select className="appearance-none cursor-pointer text-gray-700 font-medium text-sm py-2 border-none rounded-xk hover:text-orange-500 transition-colors">
-            <option className="bg-orange-500 text-white" selected>G.A.P.C.I</option>
-            <option className="bg-orange-500 text-white" >Sobre Nós</option>
-            <option className="bg-orange-500 text-white">Mensagem da Presidente</option>
-            <option className="bg-orange-500 text-white">Organograma</option>
-            <option className="bg-orange-500 text-white">Iniciativas</option>
-          </select>
+          <select
+  onChange={(e) => {
+    window.location.href = e.target.value;
+    setOpen(false);
+  }}
+  defaultValue=""
+>
+  <option value="" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors"
+             disabled>G.A.P.C.I</option>
+  <option value="#sobre" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors"
+            >Sobre Nós</option>
+  <option value="#missao" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors"
+            >Mensagem da Presidente</option>
+  <option value="#contacto" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors"
+            >Organograma</option>
+  <option value="#iniciativas" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors"
+            >Iniciativas</option>
+</select>
           {links.map((link) => (
             <a
               key={link.href}
