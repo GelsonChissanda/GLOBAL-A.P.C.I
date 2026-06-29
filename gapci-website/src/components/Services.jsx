@@ -1,23 +1,21 @@
 import { useState } from "react"
-import { Archive, Database, Library, Monitor, BookMarked, ScanLine, GraduationCap, CalendarDays } from "lucide-react"
+import { Archive, Database, Library, Monitor, BookOpen, ShieldCheck, FolderOpen, CalendarDays, Info, BookMarked, LayoutDashboard } from "lucide-react"
 
 const empresas = [
-  { icon: <Archive size={24} />, title: "Gestão de Arquivos Institucionais", desc: "Diagnóstico, organização e capacitação em gestão documental." },
-  { icon: <Database size={24} />, title: "Gestão da Informação", desc: "Definição de políticas, ferramentas digitais e preservação da memória institucional." },
-  { icon: <Library size={24} />, title: "Gestão Bibliotecária", desc: "Catalogação, indexação, bibliotecas digitais e repositórios institucionais." },
-  { icon: <Monitor size={24} />, title: "Software BibLivre", desc: "Implementação, configuração e formação no software de gestão bibliográfica BibLivre." },
-  { icon: <BookMarked size={24} />, title: "Bibliotecas Especializadas", desc: "Planeamento e implementação de bibliotecas no seio organizacional." },
-  { icon: <ScanLine size={24} />, title: "Digitalização de Documentos", desc: "Conversão e preservação digital de documentos físicos." },
-  { icon: <GraduationCap size={24} />, title: "Formação Profissional", desc: "Cursos em Arquivologia, Biblioteconomia, BibLivre e Digitalização." },
-  { icon: <CalendarDays size={24} />, title: "Gestão de Eventos", desc: "Organização e gestão de eventos académicos e corporativos." },
+  { icon: <Archive size={24} />, title: "Consultoria de Gestão de Arquivos Institucionais", desc: "Diagnóstico, organização e capacitação em gestão documental." },
+  { icon: <Database size={24} />, title: "Consultoria em Gestão da Informação", desc: "Definição de políticas, ferramentas digitais e preservação da memória institucional." },
+  { icon: <Library size={24} />, title: "Consultoria em Gestão Bibliotecária", desc: "Catalogação, indexação, bibliotecas digitais e repositórios institucionais." },
+  { icon: <BookOpen size={24} />, title: "Implementação de Bibliotecas Especializadas", desc: "Planeamento e implementação de bibliotecas no seio organizacional." },
+  { icon: <Monitor size={24} />, title: "Consultoria em Software BibLivre", desc: "Implementação, configuração e formação no software de gestão bibliográfica BibLivre." },
+  { icon: <ShieldCheck size={24} />, title: "Higienização e Desinfestação de Documentos", desc: "Tratamento e preservação física de documentos institucionais." },
+  { icon: <CalendarDays size={24} />, title: "Gestão de Eventos Académicos e Corporativos", desc: "Organização e gestão de eventos académicos e corporativos." },
 ]
 
 const particulares = [
-  { icon: <GraduationCap size={24} />, title: "Formação Profissional", desc: "Cursos em Arquivologia, Biblioteconomia, BibLivre e Digitalização." },
-  { icon: <Archive size={24} />, title: "Gestão de Arquivos Institucionais", desc: "Diagnóstico, organização e capacitação em gestão documental." },
-  { icon: <Database size={24} />, title: "Gestão da Informação", desc: "Definição de políticas e práticas para acesso e uso da informação." },
-  { icon: <Library size={24} />, title: "Gestão Bibliotecária", desc: "Catalogação, indexação e implementação de sistemas bibliotecários." },
-  { icon: <Monitor size={24} />, title: "Software BibLivre", desc: "Consultoria e formação no software de gestão bibliográfica BibLivre." },
+  { icon: <FolderOpen size={24} />, title: "Consultoria em Gestão Documental", desc: "Diagnóstico, organização e capacitação em gestão documental." },
+  { icon: <Info size={24} />, title: "Consultoria em Gestão da Informação", desc: "Definição de políticas e práticas para acesso e uso da informação." },
+  { icon: <BookMarked size={24} />, title: "Consultoria em Gestão Bibliotecária", desc: "Catalogação, indexação e implementação de sistemas bibliotecários." },
+  { icon: <LayoutDashboard size={24} />, title: "Consultoria em Software BibLivre", desc: "Consultoria e formação no software de gestão bibliográfica BibLivre." },
 ]
 
 export default function Services() {
