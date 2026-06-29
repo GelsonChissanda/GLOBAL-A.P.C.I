@@ -15,29 +15,26 @@ export default function Values() {
   return (
     <section id="valores" className="py-24 bg-gray-900 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
-          <div className="reveal bg-orange-500 rounded-2xl p-10">
-            <h3 className="text-white font-black text-2xl mb-4">Missão</h3>
-            <p className="text-orange-100 leading-relaxed">
-              Facilitar o acesso à informação e preservar a memória institucional através da
-              digitalização de documentos, organização de bibliotecas e gestão eficiente de
-              arquivos institucionais, promovendo a capacitação profissional em Biblioteconomia e Arquivística.
-            </p>
-          </div>
-          <div className="reveal bg-white/10 rounded-2xl p-10 border border-white/10">
-            <h3 className="text-white font-black text-2xl mb-4">Visão</h3>
-            <p className="text-gray-400 leading-relaxed">
-              Ser uma academia de suporte referencial ao nível nacional e internacional
-              na área das Ciências da Informação.
-            </p>
-          </div>
-        </div>
+       <div className="grid md:grid-cols-2 gap-8 mb-20">
+  <div className="reveal bg-orange-500 rounded-2xl p-10">
+    <h3 className="text-white font-black text-2xl mb-4">Formação Complementar</h3>
+    <p className="text-orange-100 leading-relaxed">
+      Programas de formação prática nas áreas de Arquivologia, Biblioteconomia e Digitalização de Documentos, 
+      destinados a profissionais que pretendem aprofundar os seus conhecimentos e melhorar o desempenho no ambiente de trabalho.
+    </p>
+  </div>
+  <div className="reveal bg-white/10 rounded-2xl p-10 border border-white/10">
+    <h3 className="text-white font-black text-2xl mb-4">Formação Executiva</h3>
+    <p className="text-gray-400 leading-relaxed">
+      Formação especializada para gestores e quadros superiores, focada na gestão estratégica da informação 
+      e na implementação de boas práticas documentais no seio das organizações angolanas.
+    </p>
+  </div>
+</div>
 
         <div className="text-center mb-12 reveal">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
-            Os nossos princípios
-          </span>
-          <h2 className="text-4xl font-black text-white mt-2">Valores</h2>
+          
+          <h2 className="text-4xl font-black text-white mt-2">Publicações</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

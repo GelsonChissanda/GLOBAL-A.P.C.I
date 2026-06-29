@@ -4,7 +4,7 @@ import logo from "../assets/logoo.png";
 
 const links = [
   { label: "Serviços", href: "#servicos" },
-  { label: "Missão & Valores", href: "#valores" },
+  { label: "Ensino & Publicações", href: "#valores" },
   { label: "Contacto", href: "#contacto" },
 ];
 
