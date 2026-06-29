@@ -51,7 +51,7 @@ export default function Navbar() {
 >
   G.A.P.C.I
 
-  <ul className=" rounded-xl absolute left-0 mt-0 hidden w-48 bg-white shadow-lg group-hover:block">
+  <ul className=" rounded-xl absolute left-0 mt-0 hidden w-48 bg-white shadow-lg group-hover:block transition duration-1000">
     <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
       <a href="#sobre">Sobre Nós</a>
     </li>
