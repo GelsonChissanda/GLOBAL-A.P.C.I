@@ -3,7 +3,6 @@ import { Menu, X } from "lucide-react";
 import logo from "../assets/logoo.png";
 
 const links = [
-  { label: "G.A.P.C.I", href: "#sobre" },
   { label: "Serviços", href: "#servicos" },
   { label: "Missão & Valores", href: "#valores" },
   { label: "Contacto", href: "#contacto" },
@@ -44,6 +43,31 @@ export default function Navbar() {
 
         {/* Links desktop */}
         <ul className="hidden md:flex items-center gap-8">
+
+          <li
+  className={`cursor-pointer relative group text-sm font-medium hover:text-orange-500 transition-colors ${
+    scrolled ? "text-gray-700" : "text-white"
+  }`}
+>
+  G.A.P.C.I
+
+  <ul className=" rounded-xl absolute left-0 mt-0 hidden w-48 bg-white shadow-lg group-hover:block">
+    <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
+      <a href="#sobre">Sobre Nós</a>
+    </li>
+    <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
+      <a href="#missao">Mensagem da Presidente</a>
+    </li>
+    <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
+      <a href="#contacto">Organograma</a>
+    </li>
+    <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
+      <a href="#contacto"> Iniciativas</a>
+    </li>
+  </ul>
+</li>
+
+
           {links.map((link) => (
             <li key={link.href}>
               <a
@@ -76,6 +100,7 @@ export default function Navbar() {
       {/* Menu mobile */}
       {open && (
         <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col gap-3">
+          <li className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors">G.A.P.C.I</li>
           {links.map((link) => (
             <a
               key={link.href}
