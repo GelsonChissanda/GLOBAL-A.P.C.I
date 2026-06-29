@@ -31,7 +31,7 @@ export default function Navbar() {
           <span
             className={`text-sm md:text-base font-bold ${scrolled ? "text-orange-600" : "text-white"}`}
           >
-            GLOBAL APCI
+            GLOBAL A.P.C.I
           </span>
 
           <span
