@@ -18,6 +18,7 @@ const particulares = [
   { icon: <LayoutDashboard size={24} />, title: "Consultoria em Software BibLivre", desc: "Consultoria e formação no software de gestão bibliográfica BibLivre." },
 ]
 
+
 export default function Services() {
   const [tab, setTab] = useState("empresas")
   const list = tab === "empresas" ? empresas : particulares
