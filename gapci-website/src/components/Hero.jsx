@@ -7,9 +7,7 @@ export default function Hero() {
       </div>
 
       <div className="max-w-4xl mx-auto text-center relative z-10 reveal">
-        <span className="inline-block bg-orange-500/20 text-orange-400 text-sm font-semibold px-4 py-1 rounded-full mb-6 border border-orange-500/30">
-          Academia dos Profissionais de Ciências da Informação
-        </span>
+        
 
         <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-6">
           A sua informação{" "}
