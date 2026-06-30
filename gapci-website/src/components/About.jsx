@@ -1,6 +1,9 @@
 import { BookOpen, Users, Award } from "lucide-react"
 import logo from "../assets/logoo.png"
 import LoopGallery from "./LoopGallery"
+import publ from "../assets/publ.jpeg"
+import publ2 from "../assets/publ2.jpeg"
+import publ3 from "../assets/publ3.jpeg"
 
 const stats = [
   { icon: <BookOpen size={28} />, value: "2022", label: "Ano de Fundação" },
@@ -86,8 +89,9 @@ export default function About() {
             title="Inovação e Formação"
             subtitle="Experiências em destaque"
             items={[
-              { src: logo, alt: "Logo GAPCI", caption: "Academia de transformação e inovação" },
-              { src: logo, alt: "Logo GAPCI", caption: "Eventos e capacitações para empresas e particulares" },
+              { src: publ, alt: "Logo GAPCI", caption: "Academia de transformação e inovação" },
+              { src: publ2, alt: "Logo GAPCI", caption: "Eventos e capacitações para empresas e particulares" },
+              { src: publ3, alt: "Logo GAPCI", caption: "Parcerias e projetos de impacto" },
             ]}
           />
         </div>
