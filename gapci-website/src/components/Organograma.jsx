@@ -1,3 +1,10 @@
+import foto1 from "../assets/foto1.jpeg"
+import foto2 from "../assets/foto2.jpeg"
+import foto3 from "../assets/foto3.jpeg"
+import foto4 from "../assets/foto4.jpeg"
+import foto5 from "../assets/foto5.jpeg"
+
+
 export default function Organograma() {
   const perfis = [
     {
@@ -7,19 +14,19 @@ export default function Organograma() {
           nome: "Ana Martins",
           cargo: "Presidente do Conselho de Administração",
           departamento: "Administração Geral",
-          foto: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
+          foto: foto1,
         },
         {
           nome: "Miguel Costa",
           cargo: "Director do Gabinete do Presidente do Conselho de Administração",
           departamento: "Gabinete Presidencial",
-          foto: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
+          foto: foto2 ,
         },
         {
           nome: "Lúcia Fernandes",
           cargo: "Director Executivo",
           departamento: "Direção Executiva",
-          foto: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=500&q=80",
+          foto: foto3,
         },
       ],
     },
@@ -30,13 +37,13 @@ export default function Organograma() {
           nome: "Rui Silva",
           cargo: "Chefe do Departamento de Apoio ao Conselho de Administração",
           departamento: "Apoio Institucional",
-          foto: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+          foto: foto4,
         },
         {
           nome: "Marta Dias",
           cargo: "Chefe do Departamento de Administração e Serviços Gerais",
           departamento: "Administração e Serviços",
-          foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80",
+          foto: foto5,
         },
         {
           nome: "Paulo Mendes",
@@ -102,7 +109,7 @@ export default function Organograma() {
   ]
 
   return (
-    <section id="organograma" className="py-24 bg-gradient-to-br from-orange-50 via-white to-gray-50 px-6">
+    <section id="organograma" className="py-24 bg-linear-to-br from-orange-50 via-white to-gray-50 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 reveal">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
@@ -121,7 +128,7 @@ export default function Organograma() {
                     key={i}
                     className="group overflow-hidden rounded-3xl border border-orange-100 bg-white shadow-[0_10px_35px_rgba(249,115,22,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(249,115,22,0.16)]"
                   >
-                    <img src={pessoa.foto} alt={pessoa.nome} className="h-56 w-full object-cover" />
+                    <img src={pessoa.foto} alt={pessoa.nome} className="h-56 bg-center w-full object-cover" />
                     <div className="p-5">
                       <h4 className="text-lg font-bold text-gray-900">{pessoa.nome}</h4>
                       <p className="mt-2 text-sm font-semibold text-orange-500">{pessoa.cargo}</p>
