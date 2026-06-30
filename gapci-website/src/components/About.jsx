@@ -1,4 +1,5 @@
 import { BookOpen, Users, Award } from "lucide-react"
+import logo from "../assets/logoo.png"
 
 const stats = [
   { icon: <BookOpen size={28} />, value: "2022", label: "Ano de Fundação" },
@@ -14,17 +15,22 @@ export default function About() {
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             Sobre Nós
           </span>
-          <h2 className="text-4xl font-black text-gray-900 mt-2 mb-6 leading-tight">
-            Especialistas em Ciências da Informação em Angola
-          </h2>
+          <div className="flex items-center gap-3 mb-6">
+            <img src={logo} alt="Logo GAPCI" className="h-14 w-14 object-contain" />
+            <span
+            className="text-sm  font-bold text-orange-600"
+          >
+            GLOBAL A.P.C.I
+          </span>
+          </div>
           <p className="text-gray-600 text-lg leading-relaxed mb-4">
-            A GLOBAL A.P.C.I foi fundada em Junho de 2022 por <strong>Delfina dos Santos Manuel</strong>,
-            formada em Ciências da Informação pela Faculdade de Ciências Sociais da Universidade Agostinho Neto.
+            Somos uma academia de transformação e inovação!
           </p>
           <p className="text-gray-600 text-lg leading-relaxed">
-            Criada com o objectivo de oferecer às empresas serviços especializados em
-            Biblioteconomia, Arquivologia, Digitalização de Documentos e Gestão da Informação,
-            a GAPCI compromete-se com a qualidade, excelência e máxima satisfação dos clientes.
+            Fundada em Junho de 2022, a GLOBAL A. P. C. I-Academia dos Profissionais de Ciências da Informação surgiu com o objectivo de oferecer às empresas e particulares serviços especializados nas áreas das Ciências da Informação: Biblioteconomia, Arquivologia, Digitalização de Documentos e Gestão da Informação. A GAPCI compromete-se com a qualidade, excelência e a máxima satisfação dos clientes.
+          </p>
+          <p className="text-gray-600 text-lg leading-relaxed mt-4">
+            Promovemos eventos culturais e comerciais com um foco nos temas relevantes para as nossas áreas de actuação, mantendo sempre uma perspectiva global.
           </p>
         </div>
 

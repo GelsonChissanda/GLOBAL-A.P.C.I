@@ -5,8 +5,8 @@ const empresas = [
   { icon: <Archive size={24} />, title: "Consultoria de Gestão de Arquivos Institucionais", desc: "Diagnóstico, organização e capacitação em gestão documental." },
   { icon: <Database size={24} />, title: "Consultoria em Gestão da Informação", desc: "Definição de políticas, ferramentas digitais e preservação da memória institucional." },
   { icon: <Library size={24} />, title: "Consultoria em Gestão Bibliotecária", desc: "Catalogação, indexação, bibliotecas digitais e repositórios institucionais." },
-  { icon: <BookOpen size={24} />, title: "Implementação de Bibliotecas Especializadas", desc: "Planeamento e implementação de bibliotecas no seio organizacional." },
-  { icon: <Monitor size={24} />, title: "Consultoria em Software BibLivre", desc: "Implementação, configuração e formação no software de gestão bibliográfica BibLivre." },
+  { icon: <BookOpen size={24} />, title: "Implementação de Bibliotecas Especializadas no seio Organizacional", desc: "Planeamento e implementação de bibliotecas no seio organizacional." },
+  { icon: <Monitor size={24} />, title: "Consultoria em Software de Gestão Bibliotecária BibLivre", desc: "Implementação, configuração e formação no software de gestão bibliográfica BibLivre." },
   { icon: <ShieldCheck size={24} />, title: "Higienização e Desinfestação de Documentos", desc: "Tratamento e preservação física de documentos institucionais." },
   { icon: <CalendarDays size={24} />, title: "Gestão de Eventos Académicos e Corporativos", desc: "Organização e gestão de eventos académicos e corporativos." },
 ]
@@ -15,7 +15,7 @@ const particulares = [
   { icon: <FolderOpen size={24} />, title: "Consultoria em Gestão Documental", desc: "Diagnóstico, organização e capacitação em gestão documental." },
   { icon: <Info size={24} />, title: "Consultoria em Gestão da Informação", desc: "Definição de políticas e práticas para acesso e uso da informação." },
   { icon: <BookMarked size={24} />, title: "Consultoria em Gestão Bibliotecária", desc: "Catalogação, indexação e implementação de sistemas bibliotecários." },
-  { icon: <LayoutDashboard size={24} />, title: "Consultoria em Software BibLivre", desc: "Consultoria e formação no software de gestão bibliográfica BibLivre." },
+  { icon: <LayoutDashboard size={24} />, title: "Consultoria em Software de Gestão Bibliotecária BibLivre", desc: "Consultoria e formação no software de gestão bibliográfica BibLivre." },
 ]
 
 
