@@ -23,7 +23,7 @@ export default function Organograma() {
           foto: foto2 ,
         },
         {
-          nome: "Lúcia Fernandes",
+          nome: "Lúcio Fernandes",
           cargo: "Director Executivo",
           departamento: "Direção Executiva",
           foto: foto3,
@@ -128,7 +128,13 @@ export default function Organograma() {
                     key={i}
                     className="group overflow-hidden rounded-3xl border border-orange-100 bg-white shadow-[0_10px_35px_rgba(249,115,22,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(249,115,22,0.16)]"
                   >
-                    <img src={pessoa.foto} alt={pessoa.nome} className="h-56 bg-center w-full object-cover" />
+                    <div className="h-56 overflow-hidden bg-gray-100">
+                      <img
+                        src={pessoa.foto}
+                        alt={pessoa.nome}
+                        className="h-full w-full object-contain object-center scale-110"
+                      />
+                    </div>
                     <div className="p-5">
                       <h4 className="text-lg font-bold text-gray-900">{pessoa.nome}</h4>
                       <p className="mt-2 text-sm font-semibold text-orange-500">{pessoa.cargo}</p>
