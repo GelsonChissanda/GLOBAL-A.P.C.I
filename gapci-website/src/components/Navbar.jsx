@@ -90,7 +90,7 @@ export default function Navbar() {
                 <a href="#missao">Mensagem da Presidente</a>
               </li>
               <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
-                <a href="#contacto">Organograma</a>
+                <a href="#organograma">Organograma</a>
               </li>
               <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
                 <a href="#contacto">Iniciativas</a>
@@ -157,7 +157,7 @@ export default function Navbar() {
             <option value="#missao" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors">
               Mensagem da Presidente
             </option>
-            <option value="#contacto" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors">
+            <option value="#organograma" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors">
               Organograma
             </option>
             <option value="#iniciativas" className="text-gray-700 font-medium text-sm py-2 border-b border-gray-50 hover:text-orange-500 transition-colors">

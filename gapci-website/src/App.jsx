@@ -8,6 +8,7 @@ import WhyUs from "./components/WhyUs"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import WhatsAppButton from "./components/WhatsAppButton"
+import Organograma from "./components/Organograma"
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
       <Navbar/>
       <Hero />
       <About />
+      <Organograma />
       <Services />
       <Values />
       <WhyUs />

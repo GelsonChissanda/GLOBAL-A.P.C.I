@@ -1,3 +1,5 @@
+import LoopGallery from "./LoopGallery";
+
 export default function Hero() {
   return (
     <section id="home" className="min-h-screen bg-gray-900 flex items-center justify-center px-6 relative overflow-hidden py-20">
@@ -29,6 +31,17 @@ export default function Hero() {
           <a href="#contacto" className="border border-white/30 hover:border-orange-500 text-white font-semibold px-8 py-3 rounded-full transition-colors hover:text-orange-400">
             Contactar
           </a>
+        </div>
+
+        <div className="mt-10 max-w-3xl mx-auto">
+          <LoopGallery
+            title="Transformação e conhecimento"
+            subtitle="Experiências GAPCI"
+            items={[
+              { src: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80", alt: "Formação e eventos", caption: "Formação, inovação e desenvolvimento para empresas e particulares" },
+              { src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80", alt: "Trabalho em equipa", caption: "Capacitação e networking com impacto real" },
+            ]}
+          />
         </div>
       </div>
     </section>

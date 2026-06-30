@@ -1,5 +1,6 @@
 import { BookOpen, Users, Award } from "lucide-react"
 import logo from "../assets/logoo.png"
+import LoopGallery from "./LoopGallery"
 
 const stats = [
   { icon: <BookOpen size={28} />, value: "2022", label: "Ano de Fundação" },
@@ -32,6 +33,42 @@ export default function About() {
           <p className="text-gray-600 text-lg leading-relaxed mt-4">
             Promovemos eventos culturais e comerciais com um foco nos temas relevantes para as nossas áreas de actuação, mantendo sempre uma perspectiva global.
           </p>
+
+          <div className="mt-8 space-y-5">
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-1">Missão</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
+                Capacitar organizações e indivíduos com soluções de excelência em gestão da informação, biblioteconomia e arquivologia.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-1">Visão</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
+                Ser referência em transformação, inovação e desenvolvimento sustentável nas áreas da informação e conhecimento.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-1">Valores</h3>
+              <p className="text-gray-600 text-base leading-relaxed">
+                Qualidade, excelência, ética, inovação, compromisso e satisfação dos clientes.
+              </p>
+            </div>
+          </div>
+
+          <div className="mt-8 grid sm:grid-cols-2 gap-4">
+            <div className="bg-orange-50 rounded-2xl p-4">
+              <p className="text-sm font-semibold text-orange-600">Existência</p>
+              <p className="text-2xl font-black text-gray-900 mt-1">4 anos</p>
+            </div>
+            <div className="bg-orange-50 rounded-2xl p-4">
+              <p className="text-sm font-semibold text-orange-600">Formandos</p>
+              <p className="text-2xl font-black text-gray-900 mt-1">+ 5000</p>
+            </div>
+            <div className="bg-orange-50 rounded-2xl p-4 sm:col-span-2">
+              <p className="text-sm font-semibold text-orange-600">Actividades Académicas e Corporativas</p>
+              <p className="text-2xl font-black text-gray-900 mt-1">+ 600 Participantes</p>
+            </div>
+          </div>
         </div>
 
         <div className="flex flex-col gap-6 reveal">
@@ -44,6 +81,15 @@ export default function About() {
               </div>
             </div>
           ))}
+
+          <LoopGallery
+            title="Inovação e Formação"
+            subtitle="Experiências em destaque"
+            items={[
+              { src: logo, alt: "Logo GAPCI", caption: "Academia de transformação e inovação" },
+              { src: logo, alt: "Logo GAPCI", caption: "Eventos e capacitações para empresas e particulares" },
+            ]}
+          />
         </div>
       </div>
     </section>
