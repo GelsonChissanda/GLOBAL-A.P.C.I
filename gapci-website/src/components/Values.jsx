@@ -1,14 +1,23 @@
-import { Heart, Shield, Lightbulb, Star, Unlock, Scale, Users, BookOpen } from "lucide-react"
+import publ from "../assets/publ.jpeg"
+import publ2 from "../assets/publ2.jpeg"
+import publ3 from "../assets/publ3.jpeg"
 
-const values = [
-  { icon: <Heart size={24} />, title: "Comprometimento", desc: "Dedicação total à satisfação do cliente." },
-  { icon: <Shield size={24} />, title: "Preservação", desc: "Garantir a integridade e longevidade dos documentos." },
-  { icon: <Lightbulb size={24} />, title: "Inovação", desc: "Tecnologias modernas para optimizar processos." },
-  { icon: <Star size={24} />, title: "Excelência", desc: "Serviços de alta qualidade e confiabilidade." },
-  { icon: <Unlock size={24} />, title: "Acessibilidade", desc: "Democratizar o acesso à informação e ao conhecimento." },
-  { icon: <Scale size={24} />, title: "Transparência", desc: "Ética e clareza em todas as relações institucionais." },
-  { icon: <Users size={24} />, title: "Responsabilidade Social", desc: "Valorização cultural e educacional da sociedade." },
-  { icon: <BookOpen size={24} />, title: "Capacitação", desc: "Investir na formação contínua de profissionais." },
+const posts = [
+  {
+    image: publ,
+    title: "Sessão de Formação em Gestão Documental",
+    desc: "Uma conversa prática sobre organização, preservação e acesso à informação em ambientes corporativos.",
+  },
+  {
+    image: publ2,
+    title: "Evento de Capacitação para Profissionais",
+    desc: "Explorámos novas metodologias, boas práticas e soluções inovadoras para o setor da informação.",
+  },
+  {
+    image: publ3,
+    title: "Parcerias e Projetos de Impacto",
+    desc: "A GAPCI reforça a sua presença com iniciativas que unem conhecimento, cultura e transformação.",
+  },
 ]
 
 export default function Values() {
@@ -32,17 +41,18 @@ export default function Values() {
   </div>
 </div>
 
-        <div className="text-center mb-12 reveal">
-          
-          <h2 className="text-4xl font-black text-white mt-2">Publicações</h2>
+        <div id="social-media" className="text-center mb-12 reveal">
+          <h2 className="text-4xl font-black text-white mt-2">Social Media</h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {values.map((v, i) => (
-            <div key={i} className="reveal bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-              <div className="text-orange-500 mb-3">{v.icon}</div>
-              <h4 className="text-white font-bold mb-1">{v.title}</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">{v.desc}</p>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post, i) => (
+            <div key={i} className="reveal overflow-hidden rounded-3xl border border-white/10 bg-white/5 hover:bg-white/10 transition-colors">
+              <img src={post.image} alt={post.title} className="h-48 w-full object-cover" />
+              <div className="p-6">
+                <h4 className="text-white font-bold mb-2">{post.title}</h4>
+                <p className="text-gray-400 text-sm leading-relaxed">{post.desc}</p>
+              </div>
             </div>
           ))}
         </div>
