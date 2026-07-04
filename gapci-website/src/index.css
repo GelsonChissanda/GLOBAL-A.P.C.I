@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #020617;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(30px);
