@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import logo from "../assets/logoo.png";
 
 const links = [
@@ -80,7 +80,10 @@ export default function Navbar() {
               scrolled ? "text-gray-700" : "text-white"
             }`}
           >
-            G.A.P.C.I
+            <span className="flex items-center gap-1">
+              G.A.P.C.I
+              <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+            </span>
 
             <ul className="rounded-xl absolute left-0 mt-0 hidden w-48 bg-white shadow-lg group-hover:block transition duration-1000">
               <li className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
@@ -105,8 +108,11 @@ export default function Navbar() {
                 scrolled ? "text-gray-700" : "text-white"
               }`}
             >
-              <a href={link.href} className="block">
+              <a href={link.href} className="flex items-center gap-1">
                 {link.label}
+                {link.items && (
+                  <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+                )}
               </a>
               {link.items && (
                 <ul className="rounded-xl absolute left-0 mt-0 hidden w-56 bg-white shadow-lg group-hover:block transition duration-1000">
