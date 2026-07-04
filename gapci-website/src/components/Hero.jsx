@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react"
+import foto1 from "../assets/foto5.jpeg"
+import foto2 from "../assets/publ2.jpeg"
+import foto3 from "../assets/publ3.jpeg"
 
 const slides = [
   {
-    image:
-      "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80",
+    image: foto1,
     title: "A sua informação organizada, preservada e acessível.",
     description:
       "Consultoria especializada em gestão de arquivos, biblioteconomia, digitalização e formação profissional para empresas e particulares em Angola.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80",
+    image: foto2,
     title: "Documentos em ordem, decisões mais rápidas.",
     description:
       "Estratégias práticas para transformar o arquivo em um ativo estratégico e facilitar o dia a dia da sua organização.",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80",
+    image: foto3,
     title: "Tecnologia e expertise para um arquivo seguro.",
     description:
       "Soluções modernas que combinam organização, segurança e acessibilidade para cada etapa do processo documental.",
@@ -47,7 +47,7 @@ export default function Hero() {
               index === activeSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
             }`}
           >
-            <img src={slide.image} alt={slide.title} className="h-full w-full object-cover" />
+            <img src={slide.image} alt={slide.title} className="h-full w-full object-fill" />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-900/30" />
           </div>
         ))}
