@@ -1,11 +1,64 @@
+import { useEffect, useRef, useState } from "react"
 import { BookOpen, Users, Award } from "lucide-react"
 import logo from "../assets/logoo.png"
 
 const stats = [
-  { icon: <BookOpen size={28} />, value: "2022", label: "Ano de Fundação" },
-  { icon: <Users size={28} />, value: "B2B", label: "Empresas & Particulares" },
-  { icon: <Award size={28} />, value: "100%", label: "Profissionais Certificados" },
+  { icon: <BookOpen size={28} />, value: 2022, suffix: "", label: "Ano de Fundação" },
+  { icon: <Users size={28} />, value: 2, suffix: "B", label: "Empresas & Particulares" },
+  { icon: <Award size={28} />, value: 100, suffix: "%", label: "Profissionais Certificados" },
 ]
+
+function CountUpValue({ value, suffix = "", duration = 1200 }) {
+  const [displayValue, setDisplayValue] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHasAnimated(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.4 }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!hasAnimated) return
+
+    let frameId
+    const startTime = performance.now()
+    const target = Number(value)
+
+    const step = (currentTime) => {
+      const progress = Math.min((currentTime - startTime) / duration, 1)
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setDisplayValue(Math.round(target * eased))
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(step)
+      }
+    }
+
+    frameId = window.requestAnimationFrame(step)
+    return () => window.cancelAnimationFrame(frameId)
+  }, [duration, hasAnimated, value])
+
+  return (
+    <span ref={ref}>
+      {displayValue}
+      {suffix}
+    </span>
+  )
+}
 
 export default function About() {
 
@@ -62,7 +115,9 @@ export default function About() {
               <div className="flex items-center gap-5 rounded-2xl bg-gray-50 p-6">
                 <div className="text-orange-500">{s.icon}</div>
                 <div>
-                  <p className="text-2xl font-black text-gray-900">{s.value}</p>
+                  <p className="text-2xl font-black text-gray-900">
+                    <CountUpValue value={s.value} suffix={s.suffix} />
+                  </p>
                   <p className="text-sm text-gray-500">{s.label}</p>
                 </div>
               </div>
