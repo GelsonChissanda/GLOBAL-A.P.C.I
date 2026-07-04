@@ -18,30 +18,29 @@ const particulares = [
   { icon: <LayoutDashboard size={24} />, title: "Consultoria em Software de Gestão Bibliotecária BibLivre", desc: "Consultoria e formação no software de gestão bibliográfica BibLivre." },
 ]
 
-
 export default function Services() {
   const [tab, setTab] = useState("empresas")
   const list = tab === "empresas" ? empresas : particulares
 
   return (
-    <section id="servicos" className="py-24 bg-gray-50 px-6">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12 reveal">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
+    <section id="servicos" className="bg-gray-50 px-6 py-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-12 text-center reveal reveal-from-left">
+          <span className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-500">
             O que fazemos
           </span>
-          <h2 className="text-4xl font-black text-gray-900 mt-2">Serviços Prestados</h2>
+          <h2 className="mt-2 text-4xl font-black text-gray-900">Serviços Prestados</h2>
         </div>
 
-        <div className="flex justify-center gap-4 mb-12 reveal">
-          {["empresas", "particulares"].map(t => (
+        <div className="mb-12 flex justify-center gap-4 reveal reveal-scale">
+          {["empresas", "particulares"].map((t) => (
             <button
               key={t}
               onClick={() => setTab(t)}
-              className={`px-6 py-2 rounded-full font-semibold text-sm transition-colors ${
+              className={`rounded-full px-6 py-2 text-sm font-semibold transition-colors ${
                 tab === t
                   ? "bg-orange-500 text-white"
-                  : "bg-white text-gray-600 border border-gray-200 hover:border-orange-400"
+                  : "border border-gray-200 bg-white text-gray-600 hover:border-orange-400"
               }`}
             >
               {t === "empresas" ? "Empresas" : "Particulares"}
@@ -49,12 +48,16 @@ export default function Services() {
           ))}
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {list.map((s, i) => (
-            <div key={i} className="reveal bg-white rounded-2xl p-6 hover:shadow-lg transition-shadow border border-gray-100">
-              <div className="text-orange-500 mb-4">{s.icon}</div>
-              <h3 className="font-bold text-gray-900 mb-2">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+            <div
+              key={i}
+              className="reveal reveal-from-bottom group rounded-2xl border border-gray-100 bg-white p-6"
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
+              <div className="service-icon mb-4 inline-flex text-orange-500">{s.icon}</div>
+              <h3 className="mb-2 font-bold text-gray-900">{s.title}</h3>
+              <p className="text-sm leading-relaxed text-gray-500">{s.desc}</p>
             </div>
           ))}
         </div>

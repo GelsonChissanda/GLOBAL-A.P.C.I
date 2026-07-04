@@ -4,12 +4,15 @@ import { useState } from "react"
 export default function Contact() {
   const [form, setForm] = useState({ nome: "", email: "", mensagem: "" })
 
-  const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value })
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setForm((prev) => ({ ...prev, [name]: value }))
+  }
 
   return (
     <section id="contacto" className="py-24 bg-gray-50 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-14 reveal">
+        <div className="text-center mb-14 reveal reveal-from-left">
           <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
             Fale Connosco
           </span>
@@ -17,7 +20,7 @@ export default function Contact() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <div className="flex flex-col gap-8 reveal">
+          <div className="flex flex-col gap-8 reveal reveal-from-left">
             <div className="flex items-start gap-4">
               <div className="bg-orange-500 text-white p-3 rounded-xl">
                 <MapPin size={20} />
@@ -56,21 +59,21 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="reveal bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+          <div className="reveal reveal-from-right bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
             <div className="flex flex-col gap-4">
               <input
                 name="nome"
                 value={form.nome}
                 onChange={handleChange}
                 placeholder="Nome completo"
-                className="border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-orange-500 transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 placeholder:text-gray-400 outline-none transition-colors focus:border-orange-500"
               />
               <input
                 name="email"
                 value={form.email}
                 onChange={handleChange}
                 placeholder="Endereço de email"
-                className="border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-orange-500 transition-colors"
+                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 placeholder:text-gray-400 outline-none transition-colors focus:border-orange-500"
               />
               <textarea
                 name="mensagem"
@@ -78,7 +81,7 @@ export default function Contact() {
                 onChange={handleChange}
                 placeholder="A sua mensagem..."
                 rows={5}
-                className="border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-orange-500 transition-colors resize-none"
+                className="w-full resize-none rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 placeholder:text-gray-400 outline-none transition-colors focus:border-orange-500"
               />
               <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl transition-colors">
                 Enviar Mensagem

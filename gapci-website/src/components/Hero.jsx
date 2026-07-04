@@ -39,7 +39,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden bg-slate-950">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         {slides.map((slide, index) => (
           <div
             key={slide.image}
@@ -51,11 +51,25 @@ export default function Hero() {
             <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-900/30" />
           </div>
         ))}
+
+        <div className="pointer-events-none absolute inset-0">
+          {Array.from({ length: 16 }).map((_, index) => (
+            <span
+              key={index}
+              className="hero-particle"
+              style={{
+                left: `${8 + (index % 4) * 24}%`,
+                top: `${10 + Math.floor(index / 4) * 18}%`,
+                animationDelay: `${index * 180}ms`,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
       <div className="relative z-10 flex min-h-screen items-center px-6 py-24 sm:px-8 lg:px-12">
         <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
-          <div className="max-w-3xl reveal">
+          <div className="reveal reveal-from-left max-w-3xl">
             <p className="mb-5 inline-flex items-center rounded-full border border-orange-400/40 bg-orange-500/10 px-4 py-2 text-sm font-semibold uppercase tracking-[0.25em] text-orange-300">
               Soluções de arquivo e documentação
             </p>
@@ -82,7 +96,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="w-full max-w-sm rounded-3xl border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
+          <div className="reveal reveal-scale w-full max-w-sm rounded-3xl border border-white/15 bg-white/10 p-4 shadow-2xl backdrop-blur-xl">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-orange-300">

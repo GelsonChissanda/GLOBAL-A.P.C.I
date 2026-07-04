@@ -4,7 +4,6 @@ import foto3 from "../assets/foto3.jpeg"
 import foto4 from "../assets/foto4.jpeg"
 import foto5 from "../assets/foto5.jpeg"
 
-
 export default function Organograma() {
   const perfis = [
     {
@@ -109,36 +108,36 @@ export default function Organograma() {
   ]
 
   return (
-    <section id="organograma" className="py-24 bg-linear-to-br from-orange-50 via-white to-gray-50 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12 reveal">
-          <span className="text-orange-500 font-semibold text-sm uppercase tracking-widest">
+    <section id="organograma" className="bg-[#fff7ed] px-6 py-24 sm:px-8 lg:px-12">
+      <div className="mx-auto max-w-7xl">
+        <div className="reveal visible mb-14 text-center">
+          <span className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-500">
             Estrutura
           </span>
-          <h2 className="text-4xl font-black text-gray-900 mt-2">Organograma</h2>
+          <h2 className="mt-2 text-4xl font-black text-slate-900">Organograma</h2>
         </div>
 
-        <div className="space-y-10 reveal">
+        <div className="reveal visible space-y-10">
           {perfis.map((grupo, index) => (
             <div key={index}>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">{grupo.grupo}</h3>
+              <h3 className="mb-6 text-2xl font-bold text-slate-900">{grupo.grupo}</h3>
               <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                 {grupo.pessoas.map((pessoa, i) => (
                   <div
                     key={i}
-                    className="group overflow-hidden rounded-3xl border border-orange-100 bg-white shadow-[0_10px_35px_rgba(249,115,22,0.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(249,115,22,0.16)]"
+                    className="group overflow-hidden rounded-3xl border border-orange-200 bg-white shadow-[0_10px_35px_rgba(249,115,22,0.12)] transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(249,115,22,0.2)]"
                   >
-                    <div className="h-56 overflow-hidden bg-gray-100">
+                    <div className="h-56 overflow-hidden bg-orange-50">
                       <img
                         src={pessoa.foto}
                         alt={pessoa.nome}
-                        className="h-full w-full object-contain object-center scale-110"
+                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-5">
-                      <h4 className="text-lg font-bold text-gray-900">{pessoa.nome}</h4>
+                    <div className="border-t border-orange-100 p-5">
+                      <h4 className="text-lg font-bold text-slate-900">{pessoa.nome}</h4>
                       <p className="mt-2 text-sm font-semibold text-orange-500">{pessoa.cargo}</p>
-                      <p className="mt-2 text-sm text-gray-600">Departamento: {pessoa.departamento}</p>
+                      <p className="mt-2 text-sm leading-relaxed text-slate-600">Departamento: {pessoa.departamento}</p>
                     </div>
                   </div>
                 ))}
