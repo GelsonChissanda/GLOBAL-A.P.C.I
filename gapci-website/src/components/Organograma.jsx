@@ -12,19 +12,16 @@ export default function Organograma() {
         {
           nome: "Ana Martins",
           cargo: "Presidente do Conselho de Administração",
-          departamento: "Administração Geral",
           foto: foto1,
         },
         {
           nome: "Miguel Costa",
           cargo: "Director do Gabinete do Presidente do Conselho de Administração",
-          departamento: "Gabinete Presidencial",
           foto: foto2 ,
         },
         {
           nome: "Lúcio Fernandes",
           cargo: "Director Executivo",
-          departamento: "Direção Executiva",
           foto: foto3,
         },
       ],
@@ -35,43 +32,36 @@ export default function Organograma() {
         {
           nome: "Rui Silva",
           cargo: "Chefe do Departamento de Apoio ao Conselho de Administração",
-          departamento: "Apoio Institucional",
           foto: foto4,
         },
         {
           nome: "Marta Dias",
           cargo: "Chefe do Departamento de Administração e Serviços Gerais",
-          departamento: "Administração e Serviços",
           foto: foto5,
         },
         {
           nome: "Paulo Mendes",
           cargo: "Chefe do Departamento de Recursos Humanos",
-          departamento: "Recursos Humanos",
           foto: foto2,
         },
         {
           nome: "Sofia Lopes",
           cargo: "Chefe do Departamento de Tecnologias de Informação",
-          departamento: "Tecnologias de Informação",
           foto: foto1,
         },
         {
           nome: "Dário Nunes",
           cargo: "Chefe do Departamento de Comunicação e Marketing",
-          departamento: "Comunicação e Marketing",
           foto: foto4,
         },
         {
           nome: "Cláudia Rocha",
           cargo: "Chefe do Departamento de Logística e Património",
-          departamento: "Logística e Património",
           foto: foto5,
         },
         {
           nome: "Tiago Borges",
           cargo: "Chefe do Departamento de Protocolo e Relações Institucionais",
-          departamento: "Protocolo e Relações Institucionais",
           foto: foto2,
         },
       ],
@@ -82,25 +72,21 @@ export default function Organograma() {
         {
           nome: "Helena Tavares",
           cargo: "Chefe do Departamento de Formação, Desenvolvimento e Certificação",
-          departamento: "Formação e Certificação",
           foto: foto1,
         },
         {
           nome: "Bruno Azevedo",
           cargo: "Chefe do Departamento de Serviços de Apoio às Empresas",
-          departamento: "Suporte Empresarial",
           foto: foto2,
         },
         {
           nome: "Inês Cardoso",
           cargo: "Chefe do Departamento de Serviços de Apoio a Pessoas Individuais",
-          departamento: "Suporte Individual",
           foto: foto3,
         },
         {
           nome: "Alexandre Pinto",
           cargo: "Chefe do Departamento de Eventos Académicos e Corporativos",
-          departamento: "Eventos e Produção",
           foto: foto4,
         },
       ],
@@ -137,7 +123,6 @@ export default function Organograma() {
                     <div className="border-t border-orange-100 p-5">
                       <h4 className="text-lg font-bold text-slate-900">{pessoa.nome}</h4>
                       <p className="mt-2 text-sm font-semibold text-orange-500">{pessoa.cargo}</p>
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">Departamento: {pessoa.departamento}</p>
                     </div>
                   </div>
                 ))}
