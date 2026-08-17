@@ -1,153 +1,293 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
-import logo from "../assets/logoo.png";
+import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import { ChevronDown, Menu, X } from "lucide-react"
+import logo from "../assets/logoo.png"
 
 const gapci = {
   label: "G.A.P.C.I",
   items: [
-    { label: "Sobre Nós", href: "/sobre-nos" },
-    { label: "Mensagem da Presidente", href: "#missao" },
-    { label: "Organograma", href: "#organograma" },
-    { label: "Iniciativas", href: "#contacto" },
+    {
+      label: "Sobre Nós",
+      href: "/sobre-nos",
+    },
+    {
+      label: "Mensagem da Presidente",
+      href: "/#missao",
+    },
+    {
+      label: "Organograma",
+      href: "/organograma",
+    },
+    {
+      label: "Iniciativas",
+      href: "/#contacto",
+    },
   ],
-};
+}
 
 const links = [
-  { label: "Serviços", href: "#servicos" },
+  {
+    label: "Serviços",
+    href: "/#servicos",
+  },
   {
     label: "Ensino",
-    href: "#ensino",
+    href: "/#ensino",
     items: [
-      { label: "Formação Complementar", href: "#formacao-complementar" },
-      { label: "Formação Executiva", href: "#formacao-executiva" },
+      {
+        label: "Formação Complementar",
+        href: "/#formacao-complementar",
+      },
+      {
+        label: "Formação Executiva",
+        href: "/#formacao-executiva",
+      },
     ],
   },
   {
     label: "Publicações",
-    href: "#publicacoes",
+    href: "/#publicacoes",
     items: [
-      { label: "Social Media", href: "#social-media" },
-      { label: "Artigos", href: "#artigos" },
-      { label: "Nossos Livros", href: "#nossos-livros" },
+      {
+        label: "Social Media",
+        href: "/#social-media",
+      },
+      {
+        label: "Artigos",
+        href: "/#artigos",
+      },
+      {
+        label: "Nossos Livros",
+        href: "/#nossos-livros",
+      },
     ],
   },
   {
     label: "Institucional",
-    href: "#institucional",
+    href: "/#institucional",
     items: [
-      { label: "Notícias", href: "#noticias" },
-      { label: "Eventos", href: "#eventos" },
-      { label: "Newsletter", href: "#newsletter" },
+      {
+        label: "Notícias",
+        href: "/#noticias",
+      },
+      {
+        label: "Eventos",
+        href: "/#eventos",
+      },
+      {
+        label: "Newsletter",
+        href: "/#newsletter",
+      },
     ],
   },
   {
     label: "Contacto",
-    href: "#contacto",
+    href: "/#contacto",
     items: [
-      { label: "Reclamações", href: "#reclamacoes" },
-      { label: "Logios e Sugestões", href: "#logios-e-sugestoes" },
+      {
+        label: "Reclamações",
+        href: "/#reclamacoes",
+      },
+      {
+        label: "Logios e Sugestões",
+        href: "/#logios-e-sugestoes",
+      },
     ],
   },
-];
+]
 
-const mobileMenu = [gapci, ...links];
-
-// Renderiza como rota (/sobre-nos) ou como âncora de secção da home (#servicos -> /#servicos)
-function SmartLink({ href, className, onClick, children }) {
-  const to = href.startsWith("/") ? href : `/${href}`;
-  return (
-    <Link to={to} className={className} onClick={onClick}>
-      {children}
-    </Link>
-  );
-}
+const mobileMenu = [gapci, ...links]
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [openCategory, setOpenCategory] = useState(null);
+  const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [openCategory, setOpenCategory] = useState(null)
+
+  /* =========================================================
+     PÁGINAS INTERNAS
+  ========================================================= */
+
+  const isInternalPage =
+    window.location.pathname === "/sobre-nos" ||
+    window.location.pathname === "/organograma"
+
+  /* =========================================================
+     SCROLL
+  ========================================================= */
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handler);
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+
+    handleScroll()
+
+    window.addEventListener("scroll", handleScroll)
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  /* =========================================================
+     ESTADO VISUAL DO NAVBAR
+  ========================================================= */
+
+  const navbarScrolled = scrolled || isInternalPage
+
+  const textColor = navbarScrolled
+    ? "text-gray-700"
+    : "text-white"
+
+  const logoTitleColor = navbarScrolled
+    ? "text-orange-600"
+    : "text-white"
+
+  const logoSubtitleColor = navbarScrolled
+    ? "text-gray-600"
+    : "text-gray-300"
+
+  /* =========================================================
+     MENU MOBILE
+  ========================================================= */
 
   const toggleMenu = () => {
-    setOpen((prev) => {
-      if (prev) setOpenCategory(null);
-      return !prev;
-    });
-  };
+    setOpen((previous) => {
+      if (previous) {
+        setOpenCategory(null)
+      }
+
+      return !previous
+    })
+  }
 
   const closeAll = () => {
-    setOpen(false);
-    setOpenCategory(null);
-  };
+    setOpen(false)
+    setOpenCategory(null)
+  }
+
+  const toggleCategory = (label) => {
+    setOpenCategory((previous) =>
+      previous === label ? null : label
+    )
+  }
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-white shadow-md" : "bg-transparent"}`}
+      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+        navbarScrolled
+          ? "bg-white/95 shadow-md backdrop-blur-xl"
+          : "bg-transparent"
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="h-12 w-12 object-contain" />
+      {/* =====================================================
+          CONTAINER
+      ====================================================== */}
+
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2">
+
+        {/* ===================================================
+            LOGO
+        ==================================================== */}
+
+        <Link
+          to="/"
+          className="flex items-center gap-2"
+        >
+          <img
+            src={logo}
+            alt="GLOBAL A.P.C.I"
+            className="h-12 w-12 object-contain"
+          />
+
           <div>
             <span
-              className={`text-sm md:text-base font-bold ${scrolled ? "text-orange-600" : "text-white"}`}
+              className={`text-sm font-bold transition-colors duration-300 md:text-base ${logoTitleColor}`}
             >
               GLOBAL A.P.C.I
             </span>
 
             <span
-              className={`hidden lg:flex text-xs font-medium ${scrolled ? "text-gray-600" : "text-gray-300"}`}
+              className={`hidden text-xs font-medium transition-colors duration-300 lg:flex ${logoSubtitleColor}`}
             >
               Academia dos Profissionais de Ciências da Informação
             </span>
           </div>
         </Link>
 
-        {/* Links desktop */}
-        <ul className="hidden md:flex items-center gap-8">
+        {/* ===================================================
+            MENU DESKTOP
+        ==================================================== */}
+
+        <ul className="hidden items-center gap-8 md:flex">
+
+          {/* =================================================
+              G.A.P.C.I
+          ================================================== */}
+
           <li
-            className={`cursor-pointer relative group text-sm font-medium hover:text-orange-500 transition-colors ${
-              scrolled ? "text-gray-700" : "text-white"
-            }`}
+            className={`group relative cursor-pointer text-sm font-medium transition-colors duration-300 hover:text-orange-500 ${textColor}`}
           >
             <span className="flex items-center gap-1">
               G.A.P.C.I
-              <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+
+              <ChevronDown
+                size={16}
+                className="transition-transform duration-300 group-hover:rotate-180"
+              />
             </span>
 
-            <ul className="rounded-xl absolute left-0 mt-0 hidden w-48 bg-white shadow-lg group-hover:block transition duration-1000">
+            {/* DROPDOWN */}
+
+            <ul className="absolute left-0 top-full hidden w-56 overflow-hidden rounded-xl bg-white pt-2 shadow-xl group-hover:block">
               {gapci.items.map((item) => (
-                <li key={item.label} className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
-                  <SmartLink href={item.href}>{item.label}</SmartLink>
+                <li key={item.label}>
+                  <Link
+                    to={item.href}
+                    className="block px-4 py-3 text-sm text-gray-700 transition-all duration-200 hover:bg-orange-500 hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
           </li>
 
+          {/* =================================================
+              OUTROS LINKS
+          ================================================== */}
+
           {links.map((link) => (
             <li
               key={link.label}
-              className={`cursor-pointer relative group text-sm font-medium hover:text-orange-500 transition-colors ${
-                scrolled ? "text-gray-700" : "text-white"
-              }`}
+              className={`group relative cursor-pointer text-sm font-medium transition-colors duration-300 hover:text-orange-500 ${textColor}`}
             >
-              <SmartLink href={link.href} className="flex items-center gap-1">
+              <Link
+                to={link.href}
+                className="flex items-center gap-1"
+              >
                 {link.label}
+
                 {link.items && (
-                  <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
+                  <ChevronDown
+                    size={16}
+                    className="transition-transform duration-300 group-hover:rotate-180"
+                  />
                 )}
-              </SmartLink>
+              </Link>
+
+              {/* DROPDOWN */}
+
               {link.items && (
-                <ul className="rounded-xl absolute left-0 mt-0 hidden w-56 bg-white shadow-lg group-hover:block transition duration-1000">
+                <ul className="absolute left-0 top-full hidden w-56 overflow-hidden rounded-xl bg-white pt-2 shadow-xl group-hover:block">
                   {link.items.map((item) => (
-                    <li key={item.label} className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
-                      <SmartLink href={item.href}>{item.label}</SmartLink>
+                    <li key={item.label}>
+                      <Link
+                        to={item.href}
+                        className="block px-4 py-3 text-sm text-gray-700 transition-all duration-200 hover:bg-orange-500 hover:text-white"
+                      >
+                        {item.label}
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -156,85 +296,134 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* CTA desktop */}
-        <SmartLink
-          href="#contacto"
-          className="hidden md:inline-block bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors"
+        {/* ===================================================
+            BOTÃO CONTACTO DESKTOP
+        ==================================================== */}
+
+        <Link
+          to="/#contacto"
+          className="hidden rounded-full bg-orange-500 px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:bg-orange-600 hover:shadow-lg hover:shadow-orange-500/30 md:inline-block"
         >
           Falar Connosco
-        </SmartLink>
+        </Link>
 
-        {/* Botão mobile */}
+        {/* ===================================================
+            BOTÃO MOBILE
+        ==================================================== */}
+
         <button
-          className={`md:hidden p-1 ${scrolled ? "text-gray-900" : "text-white"}`}
+          type="button"
+          aria-label={
+            open
+              ? "Fechar menu"
+              : "Abrir menu"
+          }
           onClick={toggleMenu}
+          className={`rounded-lg p-2 transition-colors duration-300 md:hidden ${
+            navbarScrolled
+              ? "text-gray-900 hover:bg-gray-100"
+              : "text-white hover:bg-white/10"
+          }`}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? (
+            <X size={23} />
+          ) : (
+            <Menu size={23} />
+          )}
         </button>
       </div>
 
-      {/* Menu mobile — accordion por categorias */}
+      {/* =====================================================
+          MENU MOBILE
+      ====================================================== */}
+
       {open && (
-        <div className="md:hidden bg-white border-t border-gray-100 px-4 py-3 flex flex-col max-h-[80vh] overflow-y-auto shadow-lg">
+        <div className="max-h-[80vh] overflow-y-auto border-t border-gray-100 bg-white px-4 py-3 shadow-xl md:hidden">
+
           {mobileMenu.map((link) => (
-            <div key={link.label} className="border-b border-gray-100 last:border-b-0">
+            <div
+              key={link.label}
+              className="border-b border-gray-100 last:border-b-0"
+            >
+
+              {/* =================================================
+                  CATEGORIA COM SUBMENU
+              ================================================== */}
+
               {link.items ? (
                 <>
                   <button
+                    type="button"
                     onClick={() =>
-                      setOpenCategory(openCategory === link.label ? null : link.label)
+                      toggleCategory(link.label)
                     }
-                    className="w-full flex items-center justify-between py-3 text-gray-800 font-semibold text-sm"
+                    className="flex w-full items-center justify-between py-3 text-sm font-semibold text-gray-800 transition-colors hover:text-orange-500"
                   >
                     {link.label}
+
                     <ChevronDown
                       size={18}
                       className={`transition-transform duration-300 ${
-                        openCategory === link.label ? "rotate-180 text-orange-500" : "text-gray-400"
+                        openCategory === link.label
+                          ? "rotate-180 text-orange-500"
+                          : "text-gray-400"
                       }`}
                     />
                   </button>
 
                   <div
                     className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                      openCategory === link.label ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+                      openCategory === link.label
+                        ? "max-h-96 opacity-100"
+                        : "max-h-0 opacity-0"
                     }`}
                   >
-                    <div className="flex flex-col gap-1 pb-3 pl-3 ml-1 border-l-2 border-orange-100">
+                    <div className="ml-1 flex flex-col gap-1 border-l-2 border-orange-100 pb-3 pl-3">
+
                       {link.items.map((item) => (
-                        <SmartLink
+                        <Link
                           key={item.label}
-                          href={item.href}
+                          to={item.href}
                           onClick={closeAll}
-                          className="text-gray-600 text-sm py-2 pl-3 rounded-lg hover:bg-orange-50 hover:text-orange-600 transition-colors block"
+                          className="block rounded-lg py-2 pl-3 text-sm text-gray-600 transition-all duration-200 hover:bg-orange-50 hover:text-orange-600"
                         >
                           {item.label}
-                        </SmartLink>
+                        </Link>
                       ))}
+
                     </div>
                   </div>
                 </>
               ) : (
-                <SmartLink
-                  href={link.href}
+
+                /* =================================================
+                   LINK NORMAL
+                ================================================== */
+
+                <Link
+                  to={link.href}
                   onClick={closeAll}
-                  className="block py-3 text-gray-800 font-semibold text-sm hover:text-orange-500 transition-colors"
+                  className="block py-3 text-sm font-semibold text-gray-800 transition-colors hover:text-orange-500"
                 >
                   {link.label}
-                </SmartLink>
+                </Link>
               )}
             </div>
           ))}
 
-          <SmartLink
-            href="#contacto"
+          {/* =================================================
+              CTA MOBILE
+          ================================================== */}
+
+          <Link
+            to="/#contacto"
             onClick={closeAll}
-            className="mt-3 bg-orange-500 text-white text-center font-semibold px-5 py-3 rounded-full shadow-sm hover:bg-orange-600 transition-colors block"
+            className="mt-4 block rounded-full bg-orange-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-orange-600 hover:shadow-lg"
           >
             Falar Connosco
-          </SmartLink>
+          </Link>
         </div>
       )}
     </nav>
-  );
+  )
 }
