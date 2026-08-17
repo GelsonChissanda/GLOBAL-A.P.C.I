@@ -22,7 +22,7 @@ export default function Footer() {
           <a href="#contacto" className="hover:text-orange-500 transition-colors">Contacto</a>
         </div>
 
-        <p className="reveal text-sm">© 2024 GLOBAL A.P.C.I. Todos os direitos reservados.</p>
+        <p className="reveal text-sm">© 2026 GLOBAL A.P.C.I. Todos os direitos reservados.</p>
       </div>
     </footer>
   )
