@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Archive, Database, Library, Monitor, BookOpen, ShieldCheck, FolderOpen, CalendarDays, Info, BookMarked, LayoutDashboard } from "lucide-react"
+import useReveal from "../hooks/useReveal"
 
 const empresas = [
   { icon: <Archive size={24} />, title: "Consultoria de Gestão de Arquivos Institucionais", desc: "Diagnóstico, organização e capacitação em gestão documental." },
@@ -21,6 +22,8 @@ const particulares = [
 export default function Services() {
   const [tab, setTab] = useState("empresas")
   const list = tab === "empresas" ? empresas : particulares
+
+  useReveal([tab])
 
   return (
     <section id="servicos" className="bg-gray-50 px-6 py-24">

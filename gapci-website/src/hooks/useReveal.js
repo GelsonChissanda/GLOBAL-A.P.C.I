@@ -1,8 +1,9 @@
 import { useEffect } from "react"
 
-export default function useReveal() {
+export default function useReveal(deps = []) {
   useEffect(() => {
-    const elements = document.querySelectorAll(".reveal")
+    const elements = document.querySelectorAll(".reveal:not(.visible)")
+
     const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
@@ -14,7 +15,8 @@ export default function useReveal() {
       },
       { threshold: 0.15 }
     )
+
     elements.forEach(el => observer.observe(el))
     return () => observer.disconnect()
-  }, [])
+  }, deps)
 }
