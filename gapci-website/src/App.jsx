@@ -9,6 +9,8 @@ import Contact from "./components/Contact"
 import Footer from "./components/Footer"
 import WhatsAppButton from "./components/WhatsAppButton"
 import Organograma from "./components/Organograma"
+import BackToTopButton from "./components/BackToTopButton";
+
 
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
       <Contact />
       <Footer />
       <WhatsAppButton />
+      <BackToTopButton />
     </>
   )
 }
