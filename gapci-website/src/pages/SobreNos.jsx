@@ -150,6 +150,35 @@ function Reveal({ children, className = "", delay = 0 }) {
   )
 }
 
+/*
+  Hook leve para animações que dependem apenas de
+  "entrou no ecrã" (sem re-observar depois de visível).
+  Usado pela linha de progresso da timeline.
+*/
+function useInView(options) {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+
+    if (!element) return
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true)
+        observer.disconnect()
+      }
+    }, options ?? { threshold: 0.15 })
+
+    observer.observe(element)
+
+    return () => observer.disconnect()
+  }, [options])
+
+  return [ref, inView]
+}
+
 /* =========================================================
    VÍDEO
 ========================================================= */
@@ -265,7 +294,7 @@ function VideoSection() {
           {/* Controle visível apenas no desktop */}
           <button
             onClick={toggleVideo}
-            className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-xl transition duration-300 hover:scale-110 hover:bg-orange-500 md:flex"
+            className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-xl transition duration-300 hover:scale-110 hover:bg-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 md:flex"
             aria-label={playing ? "Pausar vídeo" : "Reproduzir vídeo"}
           >
             {playing ? (
@@ -326,52 +355,89 @@ function PillarCard({ item, index }) {
 
 /* =========================================================
    TIMELINE
+   — cada marco é tratado como um "registo" (mesma lógica de
+     numeração dos pilares: 01/02/03/04), com uma linha de
+     progresso que se desenha ao entrar no ecrã e o marco mais
+     recente assinalado como "Presente" com um ping, ecoando
+     o indicador ao vivo do VideoSection.
 ========================================================= */
 
 function HistoriaTimeline() {
-  return (
-    <div className="relative">
-      {/* Linha desktop */}
-      <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-neutral-200 md:block" />
+  const [wrapperRef, wrapperInView] = useInView({ threshold: 0.08 })
 
-      {/* Linha mobile */}
+  return (
+    <div ref={wrapperRef} className="relative">
+      {/* Linha base — desktop */}
+      <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-neutral-200 md:block" />
+      {/* Linha base — mobile */}
       <div className="absolute left-[10px] top-0 h-full w-px bg-neutral-200 md:hidden" />
 
+      {/* Linha de progresso — desenha-se quando a secção entra no ecrã */}
+      <div
+        className="absolute left-1/2 top-0 hidden w-px -translate-x-1/2 bg-orange-500 transition-[height] duration-[1800ms] ease-out md:block"
+        style={{ height: wrapperInView ? "100%" : "0%" }}
+      />
+      <div
+        className="absolute left-[10px] top-0 w-px bg-orange-500 transition-[height] duration-[1800ms] ease-out md:hidden"
+        style={{ height: wrapperInView ? "100%" : "0%" }}
+      />
+
       <div className="space-y-14 md:space-y-24">
-        {historia.map((item, index) => (
-          <Reveal key={item.year} delay={index * 100}>
-            <article
-              className={`relative grid md:grid-cols-2 ${
-                index % 2 !== 0 ? "md:text-right" : ""
-              }`}
-            >
-              <div
-                className={`pl-9 md:pl-0 ${
-                  index % 2 === 0
-                    ? "md:pr-20"
-                    : "md:order-2 md:pl-20"
+        {historia.map((item, index) => {
+          const isLast = index === historia.length - 1
+          const registo = String(index + 1).padStart(2, "0")
+
+          return (
+            <Reveal key={item.year} delay={index * 100}>
+              <article
+                className={`relative grid md:grid-cols-2 ${
+                  index % 2 !== 0 ? "md:text-right" : ""
                 }`}
               >
-                <span className="text-5xl font-black tracking-[-0.05em] text-orange-500 md:text-7xl">
-                  {item.year}
-                </span>
+                <div
+                  className={`pl-9 md:pl-0 ${
+                    index % 2 === 0
+                      ? "md:pr-20"
+                      : "md:order-2 md:pl-20"
+                  }`}
+                >
+                  <div
+                    className={`mb-2 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.3em] text-neutral-400 ${
+                      index % 2 !== 0 ? "md:justify-end" : ""
+                    }`}
+                  >
+                    <span>Registo {registo}</span>
+                    {isLast && (
+                      <span className="rounded-full bg-orange-50 px-2 py-0.5 text-orange-500">
+                        Presente
+                      </span>
+                    )}
+                  </div>
 
-                <h3 className="mt-3 text-2xl font-black text-neutral-950 md:text-3xl">
-                  {item.title}
-                </h3>
+                  <span className="text-5xl font-black tracking-[-0.05em] text-orange-500 md:text-7xl">
+                    {item.year}
+                  </span>
 
-                <p className="mt-4 text-sm leading-7 text-neutral-500 md:text-base">
-                  {item.text}
-                </p>
-              </div>
+                  <h3 className="mt-3 text-2xl font-black text-neutral-950 md:text-3xl">
+                    {item.title}
+                  </h3>
 
-              {/* Ponto */}
-              <div className="absolute left-0 top-2 flex h-[22px] w-[22px] items-center justify-center rounded-full border-4 border-[#fafafa] bg-orange-500 md:left-1/2 md:-translate-x-1/2">
-                <div className="h-1.5 w-1.5 rounded-full bg-white" />
-              </div>
-            </article>
-          </Reveal>
-        ))}
+                  <p className="mt-4 text-sm leading-7 text-neutral-500 md:text-base">
+                    {item.text}
+                  </p>
+                </div>
+
+                {/* Ponto */}
+                <div className="absolute left-0 top-2 flex h-[22px] w-[22px] items-center justify-center rounded-full border-4 border-[#fafafa] bg-orange-500 md:left-1/2 md:-translate-x-1/2">
+                  {isLast && (
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-60" />
+                  )}
+                  <div className="relative h-1.5 w-1.5 rounded-full bg-white" />
+                </div>
+              </article>
+            </Reveal>
+          )
+        })}
       </div>
     </div>
   )
@@ -406,7 +472,7 @@ export default function SobreNos() {
           <div className="max-w-5xl">
             <Link
               to="/"
-              className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white hover:text-black md:text-sm"
+              className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 md:text-sm"
             >
               <ArrowLeft size={15} />
 
@@ -720,8 +786,8 @@ export default function SobreNos() {
               </div>
 
               <Link
-                to="/contactos"
-                className="group inline-flex w-fit items-center gap-4 rounded-full bg-white px-7 py-4 text-sm font-black text-neutral-950 transition-all duration-300 hover:gap-6 hover:bg-neutral-950 hover:text-white"
+                to="/#contacto"
+                className="group inline-flex w-fit items-center gap-4 rounded-full bg-white px-7 py-4 text-sm font-black text-neutral-950 transition-all duration-300 hover:gap-6 hover:bg-neutral-950 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-orange-500"
               >
                 Fale connosco
 
