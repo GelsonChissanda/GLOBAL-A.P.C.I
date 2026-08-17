@@ -1,67 +1,8 @@
-import { useEffect, useRef, useState } from "react"
-import { BookOpen, Users, Award } from "lucide-react"
+import { Link } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
 import logo from "../assets/logoo.png"
 
-const stats = [
-  { icon: <BookOpen size={28} />, value: 2022, suffix: "", label: "Ano de Fundação" },
-  { icon: <Users size={28} />, value: 2, suffix: "B", label: "Empresas & Particulares" },
-  { icon: <Award size={28} />, value: 100, suffix: "%", label: "Profissionais Certificados" },
-]
-
-function CountUpValue({ value, suffix = "", duration = 1200 }) {
-  const [displayValue, setDisplayValue] = useState(0)
-  const [hasAnimated, setHasAnimated] = useState(false)
-  const ref = useRef(null)
-
-  useEffect(() => {
-    const node = ref.current
-    if (!node) return
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHasAnimated(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-
-    observer.observe(node)
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    if (!hasAnimated) return
-
-    let frameId
-    const startTime = performance.now()
-    const target = Number(value)
-
-    const step = (currentTime) => {
-      const progress = Math.min((currentTime - startTime) / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-      setDisplayValue(Math.round(target * eased))
-
-      if (progress < 1) {
-        frameId = window.requestAnimationFrame(step)
-      }
-    }
-
-    frameId = window.requestAnimationFrame(step)
-    return () => window.cancelAnimationFrame(frameId)
-  }, [duration, hasAnimated, value])
-
-  return (
-    <span ref={ref}>
-      {displayValue}
-      {suffix}
-    </span>
-  )
-}
-
 export default function About() {
-
   return (
     <section id="sobre" className="bg-white px-6 py-24">
       <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-2">
@@ -69,60 +10,36 @@ export default function About() {
           <span className="text-sm font-semibold uppercase tracking-[0.35em] text-orange-500">
             Sobre Nós
           </span>
-          <div className="mb-6 flex items-center gap-3">
+
+          <div className="mb-6 mt-3 flex items-center gap-3">
             <img src={logo} alt="Logo GAPCI" className="h-14 w-14 object-contain" />
             <span className="text-sm font-bold text-orange-600">GLOBAL A.P.C.I</span>
           </div>
+
           <p className="mb-4 text-lg leading-relaxed text-gray-600">
             Somos uma academia de transformação e inovação!
           </p>
           <p className="text-lg leading-relaxed text-gray-600">
-            Fundada em Junho de 2022, a GLOBAL A. P. C. I-Academia dos Profissionais de Ciências da Informação surgiu com o objectivo de oferecer às empresas e particulares serviços especializados nas áreas das Ciências da Informação: Biblioteconomia, Arquivologia, Digitalização de Documentos e Gestão da Informação. A GAPCI compromete-se com a qualidade, excelência e a máxima satisfação dos clientes.
-          </p>
-          <p className="mt-4 text-lg leading-relaxed text-gray-600">
-            Promovemos eventos culturais e comerciais com um foco nos temas relevantes para as nossas áreas de actuação, mantendo sempre uma perspectiva global.
+            Fundada em Junho de 2022, a GLOBAL A.P.C.I - Academia dos Profissionais de
+            Ciências da Informação oferece às empresas e particulares serviços
+            especializados em Biblioteconomia, Arquivologia, Digitalização de Documentos
+            e Gestão da Informação.
           </p>
 
-          <div className="mt-8 space-y-5">
-            <div>
-              <h3 className="mb-1 font-semibold text-gray-900">Missão</h3>
-              <p className="text-base leading-relaxed text-gray-600">
-                Capacitar organizações e indivíduos com soluções de excelência em gestão da informação, biblioteconomia e arquivologia.
-              </p>
-            </div>
-            <div>
-              <h3 className="mb-1 font-semibold text-gray-900">Visão</h3>
-              <p className="text-base leading-relaxed text-gray-600">
-                Ser referência em transformação, inovação e desenvolvimento sustentável nas áreas da informação e conhecimento.
-              </p>
-            </div>
-            <div>
-              <h3 className="mb-1 font-semibold text-gray-900">Valores</h3>
-              <p className="text-base leading-relaxed text-gray-600">
-                Qualidade, excelência, ética, inovação, compromisso e satisfação dos clientes.
-              </p>
-            </div>
-          </div>
+          <Link
+            to="/sobre-nos"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-orange-500 px-6 py-3 font-semibold text-white transition hover:bg-orange-600"
+          >
+            Saber Mais <ArrowRight size={18} />
+          </Link>
         </div>
 
-        <div className="flex flex-col gap-6">
-          {stats.map((s, i) => (
-            <div
-              key={i}
-              className={`reveal reveal-from-${i % 2 === 0 ? "left" : "right"}`}
-              style={{ transitionDelay: `${i * 100}ms` }}
-            >
-              <div className="flex items-center gap-5 rounded-2xl bg-gray-50 p-6">
-                <div className="text-orange-500">{s.icon}</div>
-                <div>
-                  <p className="text-2xl font-black text-gray-900">
-                    <CountUpValue value={s.value} suffix={s.suffix} />
-                  </p>
-                  <p className="text-sm text-gray-500">{s.label}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="reveal reveal-from-right overflow-hidden rounded-3xl">
+          <img
+            src={logo}
+            alt="GAPCI"
+            className="h-full w-full object-cover"
+          />
         </div>
       </div>
     </section>

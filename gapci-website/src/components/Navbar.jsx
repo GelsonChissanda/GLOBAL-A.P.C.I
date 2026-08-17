@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, Menu, X } from "lucide-react";
 import logo from "../assets/logoo.png";
 
 const gapci = {
   label: "G.A.P.C.I",
   items: [
-    { label: "Sobre Nós", href: "#sobre" },
+    { label: "Sobre Nós", href: "/sobre-nos" },
     { label: "Mensagem da Presidente", href: "#missao" },
     { label: "Organograma", href: "#organograma" },
     { label: "Iniciativas", href: "#contacto" },
@@ -52,6 +53,16 @@ const links = [
 
 const mobileMenu = [gapci, ...links];
 
+// Renderiza como rota (/sobre-nos) ou como âncora de secção da home (#servicos -> /#servicos)
+function SmartLink({ href, className, onClick, children }) {
+  const to = href.startsWith("/") ? href : `/${href}`;
+  return (
+    <Link to={to} className={className} onClick={onClick}>
+      {children}
+    </Link>
+  );
+}
+
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -81,7 +92,7 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Logo" className="h-12 w-12 object-contain" />
           <div>
             <span
@@ -96,7 +107,7 @@ export default function Navbar() {
               Academia dos Profissionais de Ciências da Informação
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Links desktop */}
         <ul className="hidden md:flex items-center gap-8">
@@ -113,7 +124,7 @@ export default function Navbar() {
             <ul className="rounded-xl absolute left-0 mt-0 hidden w-48 bg-white shadow-lg group-hover:block transition duration-1000">
               {gapci.items.map((item) => (
                 <li key={item.label} className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
-                  <a href={item.href}>{item.label}</a>
+                  <SmartLink href={item.href}>{item.label}</SmartLink>
                 </li>
               ))}
             </ul>
@@ -126,17 +137,17 @@ export default function Navbar() {
                 scrolled ? "text-gray-700" : "text-white"
               }`}
             >
-              <a href={link.href} className="flex items-center gap-1">
+              <SmartLink href={link.href} className="flex items-center gap-1">
                 {link.label}
                 {link.items && (
                   <ChevronDown size={16} className="transition-transform duration-300 group-hover:rotate-180" />
                 )}
-              </a>
+              </SmartLink>
               {link.items && (
                 <ul className="rounded-xl absolute left-0 mt-0 hidden w-56 bg-white shadow-lg group-hover:block transition duration-1000">
                   {link.items.map((item) => (
                     <li key={item.label} className="px-4 py-2 hover:bg-orange-500 hover:text-white hover:rounded-xl">
-                      <a href={item.href}>{item.label}</a>
+                      <SmartLink href={item.href}>{item.label}</SmartLink>
                     </li>
                   ))}
                 </ul>
@@ -146,12 +157,12 @@ export default function Navbar() {
         </ul>
 
         {/* CTA desktop */}
-        <a
+        <SmartLink
           href="#contacto"
           className="hidden md:inline-block bg-orange-500 hover:bg-orange-600 text-white text-sm font-semibold px-5 py-2 rounded-full transition-colors"
         >
           Falar Connosco
-        </a>
+        </SmartLink>
 
         {/* Botão mobile */}
         <button
@@ -191,37 +202,37 @@ export default function Navbar() {
                   >
                     <div className="flex flex-col gap-1 pb-3 pl-3 ml-1 border-l-2 border-orange-100">
                       {link.items.map((item) => (
-                        <a
+                        <SmartLink
                           key={item.label}
                           href={item.href}
                           onClick={closeAll}
-                          className="text-gray-600 text-sm py-2 pl-3 rounded-lg hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                          className="text-gray-600 text-sm py-2 pl-3 rounded-lg hover:bg-orange-50 hover:text-orange-600 transition-colors block"
                         >
                           {item.label}
-                        </a>
+                        </SmartLink>
                       ))}
                     </div>
                   </div>
                 </>
               ) : (
-                <a
+                <SmartLink
                   href={link.href}
                   onClick={closeAll}
                   className="block py-3 text-gray-800 font-semibold text-sm hover:text-orange-500 transition-colors"
                 >
                   {link.label}
-                </a>
+                </SmartLink>
               )}
             </div>
           ))}
 
-          <a
+          <SmartLink
             href="#contacto"
             onClick={closeAll}
-            className="mt-3 bg-orange-500 text-white text-center font-semibold px-5 py-3 rounded-full shadow-sm hover:bg-orange-600 transition-colors"
+            className="mt-3 bg-orange-500 text-white text-center font-semibold px-5 py-3 rounded-full shadow-sm hover:bg-orange-600 transition-colors block"
           >
             Falar Connosco
-          </a>
+          </SmartLink>
         </div>
       )}
     </nav>
