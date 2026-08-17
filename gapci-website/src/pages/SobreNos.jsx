@@ -11,6 +11,7 @@ import {
   TrendingUp,
   ChevronRight,
   Sparkles,
+  X,
 } from "lucide-react"
 
 import logo from "../assets/logoo.png"
@@ -81,26 +82,36 @@ const gallery = [
   {
     src: foto1,
     title: "Conhecimento que transforma",
+    description:
+      "Cada sessão de formação na GAPCI é pensada para ligar teoria e prática, preparando profissionais capazes de organizar e valorizar a informação nas suas instituições.",
     className: "md:col-span-7 md:row-span-2",
   },
   {
     src: foto2,
     title: "Profissionais em evolução",
+    description:
+      "Acompanhamos de perto o percurso de cada formando, do primeiro módulo à certificação, num ambiente que estimula a evolução contínua.",
     className: "md:col-span-5",
   },
   {
     src: foto3,
     title: "Experiência e inovação",
+    description:
+      "Combinamos métodos consagrados da Arquivologia e Biblioteconomia com ferramentas digitais, mantendo a GAPCI alinhada com as práticas mais actuais do sector.",
     className: "md:col-span-5",
   },
   {
     src: foto4,
     title: "Uma visão para o futuro",
+    description:
+      "Olhamos para a gestão da informação como um pilar de desenvolvimento institucional em Angola, e formamos hoje quem vai liderar essa mudança amanhã.",
     className: "md:col-span-4",
   },
   {
     src: foto5,
     title: "GLOBAL A.P.C.I",
+    description:
+      "Mais do que uma academia, somos um ponto de encontro entre profissionais, empresas e instituições que acreditam no valor da informação bem organizada.",
     className: "md:col-span-8",
   },
 ]
@@ -150,11 +161,10 @@ function Reveal({ children, className = "", delay = 0 }) {
   )
 }
 
-/*
-  Hook leve para animações que dependem apenas de
-  "entrou no ecrã" (sem re-observar depois de visível).
-  Usado pela linha de progresso da timeline.
-*/
+/* =========================================================
+   HOOK IN VIEW
+========================================================= */
+
 function useInView(options) {
   const ref = useRef(null)
   const [inView, setInView] = useState(false)
@@ -180,6 +190,104 @@ function useInView(options) {
 }
 
 /* =========================================================
+   MODAL DA GALERIA
+========================================================= */
+
+function GalleryModal({ item, onClose }) {
+  useEffect(() => {
+    if (!item) return
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+
+    // Impede a página de fazer scroll enquanto o modal está aberto
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+      document.body.style.overflow = ""
+    }
+  }, [item, onClose])
+
+  if (!item) return null
+
+  return (
+    <div
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-4 backdrop-blur-md"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={item.title}
+    >
+      <div
+        className="relative max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-[2rem] bg-white shadow-[0_30px_100px_rgba(0,0,0,0.5)]"
+        onClick={(event) => event.stopPropagation()}
+      >
+        {/* BOTÃO FECHAR */}
+
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fechar"
+          className="absolute right-4 top-4 z-20 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-md transition duration-300 hover:scale-105 hover:bg-orange-500"
+        >
+          <X size={20} />
+        </button>
+
+        <div className="grid max-h-[90vh] md:grid-cols-[1.15fr_0.85fr]">
+          {/* =================================================
+              IMAGEM
+          ================================================== */}
+
+          <div className="h-[300px] bg-neutral-950 sm:h-[400px] md:h-[600px]">
+            <img
+              src={item.src}
+              alt={item.title}
+              className="h-full w-full object-cover"
+            />
+          </div>
+
+          {/* =================================================
+              TEXTO
+          ================================================== */}
+
+          <div className="flex overflow-y-auto p-7 sm:p-10 md:p-12">
+            <div className="my-auto">
+              <span className="text-[10px] font-black uppercase tracking-[0.35em] text-orange-500">
+                Dentro da GAPCI
+              </span>
+
+              <h2 className="mt-4 text-3xl font-black leading-[1.05] tracking-[-0.04em] text-neutral-950 sm:text-4xl">
+                {item.title}
+              </h2>
+
+              <div className="my-6 h-px w-12 bg-orange-500" />
+
+              <p className="text-sm leading-7 text-neutral-500 sm:text-base">
+                {item.description}
+              </p>
+
+              <button
+                type="button"
+                onClick={onClose}
+                className="mt-8 rounded-full bg-neutral-950 px-6 py-3 text-sm font-bold text-white transition duration-300 hover:bg-orange-500"
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* =========================================================
    VÍDEO
 ========================================================= */
 
@@ -192,10 +300,6 @@ function VideoSection() {
 
     if (!video) return
 
-    /*
-      Em dispositivos móveis:
-      tenta iniciar automaticamente.
-    */
     const isMobile = window.matchMedia("(pointer: coarse)").matches
 
     if (isMobile) {
@@ -207,10 +311,6 @@ function VideoSection() {
     }
   }, [])
 
-  /*
-    Desktop:
-    mouse entrou -> reproduz
-  */
   const playVideo = () => {
     const video = videoRef.current
 
@@ -219,10 +319,6 @@ function VideoSection() {
     video.play().catch(() => {})
   }
 
-  /*
-    Desktop:
-    mouse saiu -> pausa
-  */
   const pauseVideo = () => {
     const video = videoRef.current
 
@@ -261,10 +357,8 @@ function VideoSection() {
         className="h-[430px] w-full object-cover transition duration-[1200ms] group-hover:scale-[1.04] md:h-[620px]"
       />
 
-      {/* Overlay escuro */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/10" />
 
-      {/* Badge */}
       <div className="absolute left-5 top-5 flex items-center gap-3 rounded-full border border-white/20 bg-black/20 px-4 py-2.5 text-[10px] font-bold uppercase tracking-[0.25em] text-white backdrop-blur-xl md:left-8 md:top-8 md:text-xs">
         <span className="relative flex h-2 w-2">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
@@ -274,7 +368,6 @@ function VideoSection() {
         GLOBAL A.P.C.I
       </div>
 
-      {/* Conteúdo */}
       <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10">
         <div className="flex items-end justify-between gap-5">
           <div className="max-w-2xl">
@@ -291,7 +384,6 @@ function VideoSection() {
             </h3>
           </div>
 
-          {/* Controle visível apenas no desktop */}
           <button
             onClick={toggleVideo}
             className="hidden h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/30 bg-white/10 text-white backdrop-blur-xl transition duration-300 hover:scale-110 hover:bg-orange-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 md:flex"
@@ -306,7 +398,6 @@ function VideoSection() {
         </div>
       </div>
 
-      {/* Linha decorativa */}
       <div className="absolute bottom-0 left-0 h-1 w-full overflow-hidden bg-white/10">
         <div className="h-full w-1/3 animate-[videoProgress_5s_linear_infinite] bg-orange-500" />
       </div>
@@ -324,7 +415,6 @@ function PillarCard({ item, index }) {
   return (
     <Reveal delay={index * 100}>
       <article className="group relative h-full overflow-hidden rounded-[1.75rem] border border-neutral-200 bg-white p-7 transition-all duration-500 hover:-translate-y-2 hover:border-orange-200 hover:shadow-[0_25px_70px_rgba(0,0,0,0.09)] md:p-8">
-        {/* Forma decorativa */}
         <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-orange-50 transition duration-700 group-hover:scale-150" />
 
         <div className="relative">
@@ -354,12 +444,7 @@ function PillarCard({ item, index }) {
 }
 
 /* =========================================================
-   TIMELINE
-   — cada marco é tratado como um "registo" (mesma lógica de
-     numeração dos pilares: 01/02/03/04), com uma linha de
-     progresso que se desenha ao entrar no ecrã e o marco mais
-     recente assinalado como "Presente" com um ping, ecoando
-     o indicador ao vivo do VideoSection.
+   HISTÓRIA
 ========================================================= */
 
 function HistoriaTimeline() {
@@ -367,16 +452,15 @@ function HistoriaTimeline() {
 
   return (
     <div ref={wrapperRef} className="relative">
-      {/* Linha base — desktop */}
       <div className="absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-neutral-200 md:block" />
-      {/* Linha base — mobile */}
+
       <div className="absolute left-[10px] top-0 h-full w-px bg-neutral-200 md:hidden" />
 
-      {/* Linha de progresso — desenha-se quando a secção entra no ecrã */}
       <div
         className="absolute left-1/2 top-0 hidden w-px -translate-x-1/2 bg-orange-500 transition-[height] duration-[1800ms] ease-out md:block"
         style={{ height: wrapperInView ? "100%" : "0%" }}
       />
+
       <div
         className="absolute left-[10px] top-0 w-px bg-orange-500 transition-[height] duration-[1800ms] ease-out md:hidden"
         style={{ height: wrapperInView ? "100%" : "0%" }}
@@ -407,6 +491,7 @@ function HistoriaTimeline() {
                     }`}
                   >
                     <span>Registo {registo}</span>
+
                     {isLast && (
                       <span className="rounded-full bg-orange-50 px-2 py-0.5 text-orange-500">
                         Presente
@@ -427,11 +512,11 @@ function HistoriaTimeline() {
                   </p>
                 </div>
 
-                {/* Ponto */}
                 <div className="absolute left-0 top-2 flex h-[22px] w-[22px] items-center justify-center rounded-full border-4 border-[#fafafa] bg-orange-500 md:left-1/2 md:-translate-x-1/2">
                   {isLast && (
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-60" />
                   )}
+
                   <div className="relative h-1.5 w-1.5 rounded-full bg-white" />
                 </div>
               </article>
@@ -448,6 +533,12 @@ function HistoriaTimeline() {
 ========================================================= */
 
 export default function SobreNos() {
+  /* =======================================================
+     IMAGEM SELECIONADA DA GALERIA
+  ======================================================== */
+
+  const [selectedGallery, setSelectedGallery] = useState(null)
+
   return (
     <main className="overflow-hidden bg-[#fafafa] text-neutral-950">
 
@@ -475,7 +566,6 @@ export default function SobreNos() {
               className="mb-10 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2.5 text-xs font-semibold text-white backdrop-blur-xl transition-all duration-300 hover:bg-white hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950 md:text-sm"
             >
               <ArrowLeft size={15} />
-
               Voltar à página inicial
             </Link>
 
@@ -526,10 +616,7 @@ export default function SobreNos() {
           <Reveal>
             <div>
               <div className="mb-5 flex items-center gap-3">
-                <Sparkles
-                  size={17}
-                  className="text-orange-500"
-                />
+                <Sparkles size={17} className="text-orange-500" />
 
                 <span className="text-[10px] font-black uppercase tracking-[0.35em] text-orange-500">
                   Quem somos
@@ -695,6 +782,7 @@ export default function SobreNos() {
 
       <section className="bg-white px-5 py-24 sm:px-8 md:px-10 md:py-36">
         <div className="mx-auto max-w-7xl">
+
           <Reveal>
             <div className="mb-14 flex flex-col justify-between gap-8 md:mb-20 md:flex-row md:items-end">
               <div>
@@ -721,6 +809,8 @@ export default function SobreNos() {
             </div>
           </Reveal>
 
+          {/* GALERIA */}
+
           <div className="grid auto-rows-[240px] gap-4 md:grid-cols-12 md:auto-rows-[210px]">
             {gallery.map((item, index) => (
               <Reveal
@@ -728,7 +818,11 @@ export default function SobreNos() {
                 delay={index * 100}
                 className={item.className}
               >
-                <div className="group relative h-full overflow-hidden rounded-[1.5rem] bg-neutral-100">
+                <button
+                  type="button"
+                  onClick={() => setSelectedGallery(item)}
+                  className="group relative h-full w-full overflow-hidden rounded-[1.5rem] bg-neutral-100 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+                >
                   <img
                     src={item.src}
                     alt={item.title}
@@ -747,7 +841,7 @@ export default function SobreNos() {
                       <ArrowUpRight size={18} />
                     </div>
                   </div>
-                </div>
+                </button>
               </Reveal>
             ))}
           </div>
@@ -800,6 +894,15 @@ export default function SobreNos() {
           </Reveal>
         </div>
       </section>
+
+      {/* ===================================================
+          MODAL DA GALERIA
+      ==================================================== */}
+
+      <GalleryModal
+        item={selectedGallery}
+        onClose={() => setSelectedGallery(null)}
+      />
 
       {/* ===================================================
           ANIMAÇÕES
