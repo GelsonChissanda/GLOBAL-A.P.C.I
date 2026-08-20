@@ -106,11 +106,13 @@ export default function OrganizationPreview() {
               />
             </div>
 
-            <div className="h-[203px] overflow-hidden rounded-[2rem] bg-orange-50">
+            <div className="h-[203px] overflow-hidden rounded-[2rem] bg-orange-50 overflow-hidden">
               <img
                 src={foto3}
                 alt="Equipa da GLOBAL A.P.C.I"
-                className="h-full w-full object-cover transition duration-700 hover:scale-105"
+                className="h-full w-full object-cover object-top scale-100 transition duration-700 
+                
+                hover:scale-105"
               />
             </div>
 

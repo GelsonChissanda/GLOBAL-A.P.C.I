@@ -52,19 +52,7 @@ export default function Hero() {
           </div>
         ))}
 
-        <div className="pointer-events-none absolute inset-0">
-          {Array.from({ length: 16 }).map((_, index) => (
-            <span
-              key={index}
-              className="hero-particle"
-              style={{
-                left: `${8 + (index % 4) * 24}%`,
-                top: `${10 + Math.floor(index / 4) * 18}%`,
-                animationDelay: `${index * 180}ms`,
-              }}
-            />
-          ))}
-        </div>
+  
       </div>
 
       <div className="relative z-10 flex min-h-screen items-center px-6 py-24 sm:px-8 lg:px-12">
@@ -83,7 +71,7 @@ export default function Hero() {
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
                 href="#servicos"
-                className="rounded-full bg-orange-500 px-8 py-3 text-center font-semibold text-white transition-all duration-300 hover:bg-orange-600"
+                className="rounded-full bg-[#F6A017] px-8 py-3 text-center font-semibold text-white transition-all duration-300 hover:bg-orange-600"
               >
                 Ver Serviços
               </a>

@@ -9,6 +9,7 @@ import {
   BriefcaseBusiness,
 } from "lucide-react"
 
+import secretaria from "../assets/secretaria.jpeg"
 import foto1 from "../assets/foto1.jpeg"
 import foto2 from "../assets/foto2.jpeg"
 import foto3 from "../assets/foto3.jpeg"
@@ -28,8 +29,8 @@ const perfis = [
     pessoas: [
       {
         nome: "Ana Martins",
-        cargo: "Presidente do Conselho de Administração",
-        foto: foto1,
+        cargo: "Secretária Geral",
+        foto: secretaria,
       },
       {
         nome: "Miguel Costa",
@@ -221,7 +222,7 @@ function PersonModal({ pessoa, onClose }) {
             <img
               src={pessoa.foto}
               alt={pessoa.nome}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
             />
           </div>
 
@@ -282,7 +283,7 @@ function PersonCard({ pessoa, index, onClick }) {
             src={pessoa.foto}
             alt={pessoa.nome}
             loading="lazy"
-            className="h-full w-full object-cover object-center transition duration-700 group-hover:scale-105"
+            className="h-full w-full object-contain object-center transition duration-700 group-hover:scale-105"
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80" />

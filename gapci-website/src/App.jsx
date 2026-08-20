@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { Routes, Route, useLocation } from "react-router-dom"
+import ScrollToTop from "./components/ScrollToTop";
 
 import useReveal from "./hooks/useReveal"
 
@@ -17,6 +18,7 @@ import BackToTopButton from "./components/BackToTopButton"
 
 import SobreNos from "./pages/SobreNos"
 import Organograma from "./pages/Organograma"
+
 
 function Home() {
   const { hash } = useLocation()
@@ -55,6 +57,7 @@ function App() {
     <>
       <Navbar />
 
+        <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
 

@@ -19,15 +19,7 @@ body {
   opacity: 1;
 }
 
-.hero-particle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 9999px;
-  background: rgba(249, 115, 22, 0.9);
-  box-shadow: 0 0 18px rgba(249, 115, 22, 0.7);
-  animation: floatParticle 7s ease-in-out infinite;
-}
+
 
 .reveal-from-bottom {
   transform: translateY(24px);
