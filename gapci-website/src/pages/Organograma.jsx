@@ -28,7 +28,7 @@ const perfis = [
     icon: Building2,
     pessoas: [
       {
-        nome: "Ana Martins",
+        nome: "Henriqueta Pedro",
         cargo: "Secretária Geral",
         foto: secretaria,
       },
